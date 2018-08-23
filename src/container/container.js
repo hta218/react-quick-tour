@@ -8,6 +8,7 @@ export default class ContainerState extends Container {
       currentEleIndex: -1
     };
     this.setCurrentElement = this.setCurrentElement.bind(this);
+    this.getElement = this.getElement.bind(this);
     this.updateStyle = this.updateStyle.bind(this);
   }
 
@@ -15,7 +16,7 @@ export default class ContainerState extends Container {
     this.setState({currentEleIndex: event.target.id});
   }
 
-  getElement = (event) => {
+  getElement(event) {
     let type = event.target.tagName.toLowerCase();
     let className = event.target.className;
     let text = event.target.textContent;
