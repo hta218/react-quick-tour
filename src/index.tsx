@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import App from './App';
 import './style/style.css';
 import registerServiceWorker from './registerServiceWorker';
@@ -12,4 +12,4 @@ ReactDOM.render(
                 document.getElementById('root'));
 registerServiceWorker();
 
-module.hot.accept();
+// module.hot.accept();

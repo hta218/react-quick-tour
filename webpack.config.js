@@ -8,30 +8,34 @@ const htmlPlugin = new HtmlWebpackPlugin({
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
+  resolve: {
+    // Add '.ts' and '.tsx' as resolvable extensions.
+    extensions: [".ts", ".tsx", ".js", ".json"]
+  },
   mode: "production",
   devtool: "source-map",
   module: {
-    rules: [
-      {
-        test: /\.js$/,
+    rules: [{
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: 'awesome-typescript-loader',
           options: {
-            presets: [ "env", "react" ]
+            presets: ["env", "react"]
           }
         }
       },
       {
         test: /\.css$/,
-        use: [ 
-          { loader: 'style-loader'},
-          { 
+        use: [{
+            loader: 'style-loader'
+          },
+          {
             loader: 'css-loader',
             options: {
               modules: true,
@@ -43,11 +47,16 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        loader: "source-map-loader"
       }
     ]
   },
-  plugins: [ 
-    new webpack.HotModuleReplacementPlugin(), 
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     htmlPlugin,
     new CleanWebpackPlugin(['dist'])
   ],
